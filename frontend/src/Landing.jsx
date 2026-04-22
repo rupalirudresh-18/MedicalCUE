@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 const API_BASE = import.meta.env.VITE_API_URL || "https://medicalcue-3.onrender.com";
-
 const QUICK_CHIPS = ["Diabetes", "Asthma", "Migraine", "Dengue", "Hypertension", "PCOS"];
 
 const FLOATING_CARDS = [
