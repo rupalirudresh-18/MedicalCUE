@@ -29,10 +29,11 @@ const NAV_LINKS = [
   { label: "Explore", id: "explore" },
   { label: "AI Q&A", id: "ai-qa" },
   { label: "History", id: "history" },
+  { label: "Report Analyzer", id: "report" },
   { label: "About", id: "about" },
 ];
 
-export default function Landing() {
+export default function Landing({ onNavigate }) {
   const [query, setQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
@@ -48,6 +49,7 @@ export default function Landing() {
   const [error, setError] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const recognitionRef = useRef(null);
+  
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -101,14 +103,19 @@ export default function Landing() {
   };
 
   const handleNavClick = (id) => {
-    const found = scrollToId(id);
-    if (found) return;
+  // If report page, navigate via parent
+  if (id === "report") {
+    if (onNavigate) onNavigate("report");
+    return;
+  }
 
-    if (id === "explore" || id === "ai-qa" || id === "history") {
-      scrollToId("search-box");
-    }
-  };
+  const found = scrollToId(id);
+  if (found) return;
 
+  if (id === "explore" || id === "ai-qa" || id === "history") {
+    scrollToId("search-box");
+  }
+};
   const handleSearch = async (searchTerm = query) => {
     const trimmed = searchTerm.trim();
     if (!trimmed) return;
