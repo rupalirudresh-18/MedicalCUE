@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Landing from "./Landing";
+import ReportAnalyzer from "./ReportAnalyzer"; 
 
 const API_BASE = import.meta.env.VITE_API_URL || "https://medicalcue-3.onrender.com";
 
@@ -39,7 +40,12 @@ export default function App() {
     return <LoadingScreen step={loadingStep} />;
   }
 
-  return <Landing />;
+   if (currentPage === "report") {
+    return <ReportAnalyzer onBack={() => setCurrentPage("home")} />;
+  }
+
+  return <Landing onNavigate={setCurrentPage} />;
+}
 }
 
 const STEPS = [
