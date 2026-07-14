@@ -46,7 +46,6 @@ export default function App() {
 
   return <Landing onNavigate={setCurrentPage} />;
 }
-}
 
 const STEPS = [
   { icon: "🩺", text: "Preparing Medical AI Platform..." },
